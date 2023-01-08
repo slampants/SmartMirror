@@ -1,10 +1,16 @@
-from typing import Optional
+import os.path
+
 from .Models.weather import Weather
 from .Models.forecast import Forecast
 from .weather_api import WeatherAPI
+from Visuals.surface_generator import SurfaceGenerator
+from pygame.surface import Surface
+from typing import List, Optional
+
+k_BASE_ICON_PATH = "Visuals/images/weather_icons"
 
 
-class WeatherInterface:
+class WeatherManager:
     """"A class for getting pertinent weather information"""
 
     def __init__(self):
@@ -39,3 +45,15 @@ class WeatherInterface:
             return f"Expect {description} in {slice.time_to_forecast_string()}"
 
         return "No precipitation expected in the next five days!"
+
+    def get_weather_content(self) -> List[Surface]:
+        """Provide the list of surfaces to be rendered for the weather"""
+        content: List[Surface] = []
+        self.update_weather()
+        content.append(SurfaceGenerator.text_surface("Current weather:"))
+        path_to_icon = os.path.join(k_BASE_ICON_PATH, self.current_weather.get_icon_filename())
+        content.append(SurfaceGenerator.image_surface(path_to_icon))
+        precip_string = self.get_next_precipitation_string()
+        content.append(SurfaceGenerator.text_surface(precip_string))
+        return content
+

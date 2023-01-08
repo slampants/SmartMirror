@@ -3,7 +3,7 @@ import sys
 from time import sleep
 from Visuals.surface_generator import SurfaceGenerator
 from Visuals.stack import Stack
-from Weather.weather_interface import WeatherInterface
+from Weather.weather_interface import WeatherManager
 import pygame
 
 # CONSTANTS
@@ -13,11 +13,12 @@ k_HEIGHT = 600
 # INITIALIZE
 pygame.init()
 
-WeatherManager = WeatherInterface()
+WeatherManager = WeatherManager()
 StackManager = Stack()
 SurfaceManager = SurfaceGenerator(k_WIDTH)
 
-screen = pygame.display.set_mode((k_WIDTH, k_HEIGHT))
+screen = pygame.display.set_mode((k_HEIGHT, k_WIDTH))
+screen_to_blit_to = pygame.surface.Surface((k_WIDTH, k_HEIGHT))
 
 # BUILD STACK
 StackManager.add_to_stack(SurfaceManager.text_surface("Current weather:"))
@@ -35,7 +36,9 @@ ultra_long_string = "Long " * 100
 StackManager.add_to_stack(SurfaceManager.text_surface(ultra_long_string))
 
 # BLIT
-StackManager.draw_stack_to_screen(screen)
+StackManager.draw_stack_to_surface(screen_to_blit_to)
+rotated_screen = pygame.transform.rotate(screen_to_blit_to, 90.0)
+screen.blit(rotated_screen, rotated_screen.get_rect())
 # FLIP
 pygame.display.flip()
 
