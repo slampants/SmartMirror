@@ -9,10 +9,6 @@ class Stack:
     def __init__(self):
         self.surfaces: List[Surface] = []
 
-    def add_to_stack(self, surface: Surface):
-        """Add a single surface to the stack"""
-        self.surfaces.append(surface)
-
     def add_to_stack(self, surfaces: List[Surface]):
         """Add a list of surfaces to the stack"""
         self.surfaces.extend(surfaces)
