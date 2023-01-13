@@ -15,19 +15,15 @@ DisplayManager = Display(k_SCREEN_WIDTH, k_SCREEN_HEIGHT)
 
 pygame.init()
 
-while True:
-    try:
-        print("Generating weather content")
-        weather_content = WEATHERMAN.get_weather_content()
-        MAIN_STACK.add_to_stack(weather_content)
+if __name__ == "__main__":
+    while True:
+        try:
+            print("Generating weather content")
+            weather_content = WEATHERMAN.get_weather_content()
+            MAIN_STACK.add_to_stack(weather_content)
+            DisplayManager.display_stack(MAIN_STACK)
+            sleep(60)
 
-        # TODO: Delete me (but first fix method overloading!)
-        long_text = SurfaceGenerator.text_surface("123456789012345678901234567890123456789012345678901234567890")
-        MAIN_STACK.add_to_stack([long_text])
-        
-        DisplayManager.display_stack(MAIN_STACK)
-        sleep(60)
-
-    except KeyboardInterrupt:
-        pygame.quit()
-        sys.exit(0)
+        except KeyboardInterrupt:
+            pygame.quit()
+            sys.exit(0)

@@ -40,9 +40,9 @@ class WeatherManager:
     def get_next_precipitation_string(self) -> str:
         """Provides a string that explains when (if ever) the next precipitation is expected"""
         if self.next_precipitation_forecast_slice:
-            slice = self.next_precipitation_forecast_slice
-            description = slice.weather.description
-            return f"Expect {description} in {slice.time_to_forecast_string()}"
+            forecast_slice = self.next_precipitation_forecast_slice
+            description = forecast_slice.weather.description
+            return f"Expect {description.lower()} in {forecast_slice.time_to_forecast_string()} or so."
 
         return "No precipitation expected in the next five days!"
 
@@ -50,10 +50,17 @@ class WeatherManager:
         """Provide the list of surfaces to be rendered for the weather"""
         content: List[Surface] = []
         self.update_weather()
+        # 1 "Current weather:"
         content.append(SurfaceGenerator.text_surface("Current weather:"))
+        # 2 - Current weather image
         path_to_icon = os.path.join(k_BASE_ICON_PATH, self.current_weather.get_icon_filename())
         content.append(SurfaceGenerator.image_surface(path_to_icon))
+        # 3 - Current Weather description
+        content.append(SurfaceGenerator.text_surface(self.current_weather.description))
+        content.append(SurfaceGenerator.spacer(100))
+        # 4 - Next precipitation string
         precip_string = self.get_next_precipitation_string()
         content.append(SurfaceGenerator.text_surface(precip_string))
+
         return content
 

@@ -1,0 +1,2 @@
+- CTRL-C isn't killing it. Maybe find a way to make requests non-blocking?
+- Text centering

@@ -14,12 +14,11 @@ class SurfaceGenerator:
         """Returns a text surface"""
         return TextRenderer().text_surface(text)
 
-    # @staticmethod
-    # def icon_surface(self, filename: str) -> Surface:
-    #     """Returns an icon surface"""
-    #     return ImageRenderer.weather_icon_surface(filename)
-
     @staticmethod
     def image_surface(filepath: str, max_width: int = k_CONTENT_WIDTH) -> Surface:
         """Returns an image surface"""
         return ImageRenderer.image_surface(filepath, max_width)
+
+    @staticmethod
+    def spacer(height: int = 10) -> Surface:
+        return Surface((k_CONTENT_WIDTH, height))
