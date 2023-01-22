@@ -1,2 +1,3 @@
-- CTRL-C isn't killing it. Maybe find a way to make requests non-blocking?
+- CTRL-C isn't killing it on the Pi. Maybe find a way to make requests non-blocking?
 - Text centering
+- Trim icon images and enhance (re-scale in photoshop with smoothing)

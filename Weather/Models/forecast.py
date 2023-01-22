@@ -12,8 +12,7 @@ class Forecast:
         raw_timestamp = float(forecast_slice.get('dt'))
         self.datetime: datetime = datetime.fromtimestamp(raw_timestamp)
         self.possibility_of_precipitation: float = forecast_slice.get('pop')
-        slice_weather = forecast_slice.get('weather')[0]
-        self.weather = Weather(slice_weather)
+        self.weather = Weather(forecast_slice)
 
     def _minutes_from_now(self) -> float:
         """How many minutes this Forecast slice is from the current time"""

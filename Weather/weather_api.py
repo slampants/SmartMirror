@@ -10,20 +10,23 @@ PAYLOAD = {
     "lat": CURRENT_LOCATION_LATITUDE,
     "lon": CURRENT_LOCATION_LONGITUDE,
     "appid": API_KEY,
+    "units": "imperial",
 }
 
-k_WEATHER_KEY = "weather"
 k_LIST_KEY = "list"
 
 
 class WeatherAPI:
-    """An interface with the forecast service API"""
+    """
+    An interface with the forecast service API
+    More info: https://openweathermap.org/api
+    """
     @staticmethod
     def get_current_weather() -> Weather:
         """Returns the `weather` object based on the first weather list item in the response"""
         response = requests.get(CURRENT_WEATHER_URL, params=PAYLOAD)
         current_weather_dict = json.loads(response.text)
-        return Weather(current_weather_dict[k_WEATHER_KEY][0])
+        return Weather(current_weather_dict)
 
     @staticmethod
     def get_forecast_slices() -> List[Forecast]:

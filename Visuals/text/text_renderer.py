@@ -1,19 +1,15 @@
 from pygame import font, Surface
 from typing import List, Tuple
+from .alignment import Alignment
 from ..constants import k_SCREEN_HEIGHT, k_MAIN_SIZE_CHARACTER_LIMIT
 from ..stack import Stack
 
-from enum import Enum
 import os.path
 from queue import LifoQueue
 
 k_ANTIALIAS = True
 k_FONT_COLOR = (255, 255, 255)
-
-
-class Alignment(Enum):
-    LEFT = 0
-    CENTER = 1
+k_CONTENT_WIDTH = k_SCREEN_HEIGHT
 
 
 class TextRenderer:
@@ -42,8 +38,24 @@ class TextRenderer:
         if alignment == Alignment.LEFT:
             return self.fontRenderer.render(text, anti_alias, color)
         elif alignment == Alignment.CENTER:
-            # TODO: Implement!
-            raise NotImplementedError("Not implemented!")
+            rendered_text = self.fontRenderer.render(text, anti_alias, color)
+            width = k_CONTENT_WIDTH
+            height = rendered_text.get_rect().height
+            return self._centered_on_empty_surface(rendered_text, width, height)
+
+    @staticmethod
+    def _centered_on_empty_surface(surface_to_center: Surface, target_width: int, target_height: int) -> Surface:
+        """Returns new surface with the passed-in surface centered on a blank surface of target_width x target_height"""
+        if surface_to_center.get_rect().width > target_width:
+            raise ValueError("Cannot center a surface onto a new surface of lesser width")
+
+        new_surface: Surface = Surface((target_width, target_height))
+        # How much empty space there is, laterally, at the end of the supplied surface on this new surface
+        empty_space: int = target_width - surface_to_center.get_rect().width
+        # To center it, simply place the leading edge at a value half of the empty space
+        leading_edge_value: int = empty_space // 2
+        new_surface.blit(surface_to_center, (leading_edge_value, 0))
+        return new_surface
 
     @staticmethod
     def _wrap_text_to_rows(text: str) -> List[str]:
@@ -85,6 +97,6 @@ class TextRenderer:
             total_height += row_surface.get_rect().height
             rows_stack.add_to_stack([row_surface])
 
-        result_surface: Surface = Surface((k_SCREEN_HEIGHT, total_height))
+        result_surface: Surface = Surface((k_CONTENT_WIDTH, total_height))
         rows_stack.draw_stack_to_surface(result_surface)
         return result_surface
