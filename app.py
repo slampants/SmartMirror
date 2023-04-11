@@ -17,13 +17,8 @@ pygame.init()
 
 if __name__ == "__main__":
     while True:
-        try:
-            print("Generating weather content")
-            weather_content = WEATHERMAN.get_weather_content()
-            MAIN_STACK.add_to_stack(weather_content)
-            DisplayManager.display_stack(MAIN_STACK)
-            sleep(60)
-
-        except KeyboardInterrupt:
-            pygame.quit()
-            sys.exit(0)
+        print("Generating weather content")
+        weather_content = WEATHERMAN.get_weather_content()
+        MAIN_STACK.add_to_stack(weather_content)
+        DisplayManager.display_stack(MAIN_STACK)
+        sleep(60)
