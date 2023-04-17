@@ -1,0 +1,14 @@
+# Reference Materials
+
+## Screen Resolution/Settings
+Getting the raspberry pi to output the right resolution over HDMI for the VSDISPLAY 14.9" (https://a.co/d/g5K2PMR) is simple, though not immediately straightforward.
+
+The TL;DR is that it requires you to modify settings in the `/boot/config.txt` file. Documentation for the Pi vis-a-vis video/monitor settings:
+https://www.raspberrypi.com/documentation/computers/config_txt.html#video-options
+
+I ended up finding the settings I needed via this youtube video:
+https://www.youtube.com/watch?v=dJjhZMpf26I
+
+Ultimately it only required adding three lines. I modified what the youtube video says to do, by adding `display_hdmi_rotate=3` which rotates the output 270º, since I have the monitor vertically oriented.
+
+For convenience, I have copied the `config.txt` file that works into this REF folder, so you can just copy it into the `/boot/` folder.
