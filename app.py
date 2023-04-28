@@ -2,11 +2,9 @@ from time import sleep
 from Visuals.constants import *
 from Visuals.display import Display
 from Visuals.stack import Stack
-from Visuals.surface_generator import SurfaceGenerator
 from Weather.weather_interface import WeatherManager
 
 import pygame
-import sys
 
 WEATHERMAN = WeatherManager()
 MAIN_STACK = Stack()
