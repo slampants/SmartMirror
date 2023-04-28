@@ -14,8 +14,8 @@ Some of the nuances of this project are taylored toward the very specific hardwa
 
 ### Versions
 Getting everything to play nicely together was definitely not easy. Most software versioning is accounted for in the `requirements.txt` file, but a couple others of note:
-SDL 2.0.14
-Python 3.9.2
+- SDL 2.0.14
+- Python 3.9.2
 
 ### Set up the new Pi
 Install the full 32 bit version with CLI. For whatever reason this sets things up better.
@@ -30,7 +30,8 @@ Install requirements:
 - Activate venv
 - `pip install -r requirements.txt`
 
-Replace `/boot/config.txt` with /PROJECT_DIRECTORY_HERE/REFS/config.txt
+Replace the pi's `/boot/config.txt` with `/PROJECT_DIRECTORY_HERE/REFS/config.txt`
+
 Reboot
 
 Run the app
