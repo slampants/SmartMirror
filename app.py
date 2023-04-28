@@ -10,14 +10,13 @@ import sys
 
 WEATHERMAN = WeatherManager()
 MAIN_STACK = Stack()
-ContentManager = SurfaceGenerator()
 DisplayManager = Display(k_SCREEN_WIDTH, k_SCREEN_HEIGHT)
 
 pygame.init()
+pygame.mouse.set_visible(False)
 
 if __name__ == "__main__":
     while True:
-        print("Generating weather content")
         weather_content = WEATHERMAN.get_weather_content()
         MAIN_STACK.add_to_stack(weather_content)
         DisplayManager.display_stack(MAIN_STACK)
