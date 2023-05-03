@@ -31,10 +31,10 @@ class Forecast:
 
         elif minutes >= k_MINUTES_IN_HOUR:
             hours_string = str(round(hours))
-            time_description = f"{hours_string} hours"
+            time_description = f"{hours_string} hour{'' if hours == 1 else 's'}"
 
         else:
             rounded_minutes = round(minutes)
-            time_description = f"{rounded_minutes} minutes"
+            time_description = f"{rounded_minutes} minute{'' if rounded_minutes == 1 else 's'}"
 
         return time_description
