@@ -1,5 +1,6 @@
 from requests import ConnectionError
 from time import sleep
+from Visuals.time_content import TimeContent
 from Visuals.constants import *
 from Visuals.display import Display
 from Visuals.error_content import ErrorContent
@@ -18,6 +19,7 @@ DisplayManager = Display(k_SCREEN_WIDTH, k_SCREEN_HEIGHT)
 
 if __name__ == "__main__":
     while True:
+        MAIN_STACK.add_to_stack(TimeContent.get_time_surface())
         try:
             weather_content = WEATHERMAN.get_weather_content()
             MAIN_STACK.add_to_stack(weather_content)

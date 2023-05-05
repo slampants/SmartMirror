@@ -17,6 +17,7 @@ class TextRenderer:
     def __init__(self, font_name: str = "HelveticaNeue.ttc", font_size: int = 35):
         font_path = os.path.join("Visuals/text/fonts", font_name)
         self.fontRenderer = font.Font(font_path, font_size)
+        self.bigFontRenderer = font.Font(font_path, 75)
 
     def text_surface(self, text: str, color: Tuple[int, int, int] = k_FONT_COLOR,
                      alignment: Alignment = Alignment.LEFT) -> Surface:
@@ -30,15 +31,21 @@ class TextRenderer:
         final_surface = self._rows_to_single_surface(rows, alignment=alignment)
         return final_surface
 
+    def big_text_surface(self, text: str, color: Tuple[int, int, int] = k_FONT_COLOR,
+                         alignment: Alignment = Alignment.CENTER) -> Surface:
+        """Provides a surface with large text, centered"""
+        return self._get_aligned_rendering(text, alignment=alignment, is_big=True)
+
     def _get_aligned_rendering(
             self, text: str, anti_alias: bool = k_ANTIALIAS, color: Tuple[int, int, int] = k_FONT_COLOR,
-            alignment: Alignment = Alignment.LEFT
+            alignment: Alignment = Alignment.LEFT, is_big: bool = False
     ) -> Surface:
         """Provides a surface that has text aligned as desired"""
+        renderer = self.bigFontRenderer if is_big else self.fontRenderer
         if alignment == Alignment.LEFT:
-            return self.fontRenderer.render(text, anti_alias, color)
+            return renderer.render(text, anti_alias, color)
         elif alignment == Alignment.CENTER:
-            rendered_text = self.fontRenderer.render(text, anti_alias, color)
+            rendered_text = renderer.render(text, anti_alias, color)
             width = k_CONTENT_WIDTH
             height = rendered_text.get_rect().height
             return self._centered_on_empty_surface(rendered_text, width, height)
