@@ -2,6 +2,7 @@ from .surface_generator import Surface, SurfaceGenerator
 from .text.text_renderer import Alignment
 from typing import List
 
+
 class ErrorContent:
     """This class generates error-oriented content"""
 
