@@ -18,7 +18,6 @@ class WeatherManager:
     def __init__(self):
         self.current_weather: Optional[Weather] = None
         self.next_precipitation_forecast_slice: Optional[Forecast] = None
-        self.update_weather()
 
     def update_weather(self):
         """Updates the stored weather data. Intended to be called ~1x/min"""
