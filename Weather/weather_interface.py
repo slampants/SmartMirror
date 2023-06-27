@@ -70,10 +70,11 @@ class WeatherManager:
         content.append(SurfaceGenerator.text_surface(
             self.get_current_weather_description(), alignment=Alignment.CENTER)
         )
-        content.append(SurfaceGenerator.spacer(100))
+        content.append(SurfaceGenerator.vertical_spacer(70))
         # Next precipitation string
         precip_string = self.get_next_precipitation_string()
         content.append(SurfaceGenerator.text_surface(precip_string))
+        content.append(SurfaceGenerator.vertical_spacer(100))
 
         return content
 

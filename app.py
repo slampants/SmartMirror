@@ -1,5 +1,6 @@
 from requests import ConnectionError
 from time import sleep
+from Subway.subway_interface import SubwayInterface
 from Visuals.time_content import TimeContent
 from Visuals.constants import *
 from Visuals.display import Display
@@ -13,6 +14,7 @@ pygame.init()
 pygame.mouse.set_visible(False)
 
 WEATHERMAN = WeatherManager()
+TRAIN_CONDUCTOR = SubwayInterface()
 MAIN_STACK = Stack()
 ERROR_CONTENT = ErrorContent.get_error_content()
 DisplayManager = Display(k_SCREEN_WIDTH, k_SCREEN_HEIGHT)
@@ -23,6 +25,8 @@ if __name__ == "__main__":
         try:
             weather_content = WEATHERMAN.get_weather_content()
             MAIN_STACK.add_to_stack(weather_content)
+            subway_content = TRAIN_CONDUCTOR.get_subway_content()
+            MAIN_STACK.add_to_stack(subway_content)
         except ConnectionError:
             MAIN_STACK.add_to_stack(ERROR_CONTENT)
         finally:

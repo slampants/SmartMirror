@@ -17,5 +17,5 @@ class TimeContent:
         """Gets the current time as a surface to display"""
         return [
             SurfaceGenerator.text_surface(TimeContent.get_time_string(), alignment=Alignment.CENTER, is_big=True),
-            SurfaceGenerator.spacer(20)
+            SurfaceGenerator.vertical_spacer(20)
         ]

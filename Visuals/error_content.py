@@ -21,6 +21,6 @@ class ErrorContent:
         """Returns a list containing the two error elements"""
         return [
             ErrorContent.error_image(),
-            SurfaceGenerator.spacer(40),
+            SurfaceGenerator.vertical_spacer(40),
             ErrorContent.error_message()
         ]
