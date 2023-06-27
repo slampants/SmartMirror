@@ -32,6 +32,20 @@ Install requirements:
 
 Replace the pi's `/boot/config.txt` with `/PROJECT_DIRECTORY_HERE/REFS/config.txt`
 
+To stop the `hwmon` low voltage warning messages from printing to the console, which kills the app, add:
+```
+sudo dmesg -n 1
+```
+to `/etc/rc.local`
+(src: https://askubuntu.com/questions/97256/how-do-i-disable-messages-or-logging-from-printing-on-the-console-virtual-termin/97318#97318)
+
+And modify `/etc/sysctl.conf`:
+```
+# Uncomment the following to stop low-level messages on console
+#kernel.printk = 3 4 1 3    <-------- UNCOMMENT THIS LINE
+```
+(src: https://superuser.com/questions/351387/how-to-stop-kernel-messages-from-flooding-my-console)
+
 Reboot
 
 Run the app
